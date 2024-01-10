@@ -1,0 +1,25 @@
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+
+
+/* .css */
+.user-form {
+    width: 400px;
+    margin: auto;
+  }
+  
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 16px;
+  }
+  
+  .half-width {
+    width: 48%;
+  }
+  
+  .full-width {
+    width: 100%;
+  }
+  
+  /* Add more styling as needed */
+  

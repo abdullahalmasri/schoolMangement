@@ -1,0 +1,79 @@
+<h1 mat-dialog-title>New Student</h1>
+<mat-dialog-content>
+  <button
+    type="button"
+    class="close"
+    data-dismiss="modal"
+    (click)="closeModal()"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <!-- user-form.component.html -->
+<!-- user-form.component.html -->
+<!-- user-form.component.html -->
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+    <div class="form-row">
+      <mat-form-field class="half-width">
+        <input matInput placeholder="First Name" formControlName="firstName">
+      </mat-form-field>
+  
+      <mat-form-field class="half-width">
+        <input matInput placeholder="Last Name" formControlName="lastName">
+      </mat-form-field>
+    </div>
+  
+    <div class="form-row">
+      <mat-form-field class="half-width">
+        <input matInput placeholder="Role" formControlName="role">
+      </mat-form-field>
+  
+      <mat-form-field class="half-width">
+        <input matInput placeholder="Email" formControlName="email">
+        <!-- <mat-error *ngIf="userForm.get('email').hasError('email')">
+          Please enter a valid email address.
+        </mat-error> -->
+      </mat-form-field>
+    </div>
+  
+    <mat-form-field>
+      <input matInput placeholder="Photo URL" formControlName="photo">
+    </mat-form-field>
+  
+    <div class="form-row">
+      <mat-form-field class="half-width">
+        <input matInput type="number" placeholder="Age" formControlName="age">
+      </mat-form-field>
+  
+      <mat-form-field class="half-width">
+        <input matInput placeholder="Grade" formControlName="grade">
+      </mat-form-field>
+    </div>
+  
+    <mat-form-field>
+      <input matInput type="date" placeholder="Date of School" formControlName="dateOfSchool">
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Classes and Subjects</mat-label>
+      <mat-select formControlName="classesSubjects" multiple class="full-width">
+        <!-- <mat-option *ngFor="let subject of ['Math', 'Science', 'English']" [value]="subject">
+          {{ subject }}
+        </mat-option> -->
+      </mat-select>
+    </mat-form-field>
+  
+    <mat-form-field>
+      <input matInput placeholder="Class Right Now" formControlName="classRightNow">
+    </mat-form-field>
+  
+    <div class="form-row">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
+  </form>
+  
+  
+</mat-dialog-content>
+<!-- <mat-dialog-actions align="center">
+  <button mat-button (click)="closeModal()">Cancel</button>
+  <button mat-button (click)="saveClick()">Save</button>
+</mat-dialog-actions> -->

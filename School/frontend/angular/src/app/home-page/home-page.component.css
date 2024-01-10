@@ -1,0 +1,26 @@
+/* src/app/user-dashboard/user-dashboard.component.css */
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
+/* my-material-table.component.css */
+.filters {
+    display: flex;
+    margin-bottom: 10px;
+  }
+  
+  .filter-field {
+    margin-right: 10px;
+  }
+  
+  table {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  mat-form-field {
+    width: 150px;
+    margin-top: 10px; /* Add margin-top to create space between label and select */
+  }
+  mat-select{
+    width: 150px;
+    margin-top: 50px; 
+  }
+  
