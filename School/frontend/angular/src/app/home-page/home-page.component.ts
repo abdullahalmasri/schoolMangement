@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 import { AuthService } from "../_services/auth.service";
 import { NgbModal, ModalDismissReasons } from "@ng-bootstrap/ng-bootstrap";
 import { AddStudentComponent } from "../add-student/add-student.component";
-import { MatDialog } from "@angular/material/dialog";
+import { MatDialog, MatDialogConfig } from "@angular/material/dialog";
 
 export interface UserDetails {
   id: number;
@@ -49,9 +49,7 @@ export class HomePageComponent implements OnInit {
     "lastname",
     "email",
     "dateOfschool",
-    "role",
-    "delete",
-    "Edit"
+    "role"
   ];
 
   filter1: string = "";
@@ -95,11 +93,12 @@ export class HomePageComponent implements OnInit {
   
 
   openDialog(): void {
-    this.dialog.open(AddStudentComponent, {
-      width: '250px',
-      // enterAnimationDuration,
-      // exitAnimationDuration,
-    });
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    this.dialog.open(AddStudentComponent, dialogConfig);
   }
 
   applyFilters(): void {
@@ -135,5 +134,15 @@ export class HomePageComponent implements OnInit {
     // Update the data source
     this.dataSource.data = filteredData;
     console.log(filteredData);
+  }
+
+  editRow(ele:any){
+    console.log('hey',ele);
+  }
+
+  deleteRow(element:any){
+    us
+    // this.authService.removeUser(element);
+
   }
 }

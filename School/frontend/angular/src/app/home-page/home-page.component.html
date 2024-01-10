@@ -33,21 +33,29 @@
   <button mat-raised-button color="primary" (click)="applyFilters()">
     Filter
   </button>
-  
+
   <!-- <button mat-raised-button color="primary" (click)="openModel()">Add Studet</button> -->
 </div>
-<div mat-dialog-actions>
-<button mat-raised-button color="primary" (click)="openDialog()">
+<!-- <div mat-dialog-actions> -->
+  <button mat-raised-button color="primary" (click)="openDialog()">
     Open Dialog
   </button>
-  </div>
+<!-- </div> -->
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   <!-- Column definitions -->
   <ng-container *ngFor="let column of displayedColumns" [matColumnDef]="column">
     <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
     <td mat-cell *matCellDef="let element">
-      {{ element[column] }}</td>
+      {{ element[column] }}
+      <button mat-icon-button color="primary" (click)="editRow(element[column])">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="deleteRow(element[column])">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
   </ng-container>
+  
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>

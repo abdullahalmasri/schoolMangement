@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogActions, MatDialogClose, MatDialogContent, MatDialogRef, MatDialogTitle } from '@angular/material/dialog';
+import { AuthService } from '../_services/auth.service';
+import { UserDetails } from '../home-page/home-page.component';
+import { Router } from '@angular/router';
 
 export class UserForm {
   firstName: string = '';
@@ -23,9 +26,12 @@ export class UserForm {
   
 })
 export class AddStudentComponent implements OnInit {
+  [x: string]: any;
   userForm!: FormGroup;
 
-  constructor(private fb: FormBuilder,    private dialog: MatDialog
+  userDetails:UserDetails | undefined;
+  constructor( private fb: FormBuilder,
+    public dialogRef: MatDialogRef<AddStudentComponent>,private userService:AuthService,private router:Router
     ) {}
 
   ngOnInit(): void {
@@ -47,11 +53,18 @@ export class AddStudentComponent implements OnInit {
     });
   }
   closeModal() {
-    this.dialog.closeAll();
+    this.dialogRef.close();
   }
   onSubmit(): void {
     // Implement your form submission logic here
     // if (this.userForm.valid) {
+      this.userDetails=this.userForm.value;
+      if(this.userDetails!=null)
+      this.userService.saveUserDetails(this.userDetails).subscribe((data)=>{
+        console.log(data);
+        location.reload(); 
+        // this.router.navigate(['/home']);
+      });
       console.log('Form submitted:', this.userForm.value);
       // Call your service to save data, etc.
     // } else {

@@ -51,6 +51,7 @@ public class UserController {
     @RequestMapping(value = "/api/v1/auth/users", method = RequestMethod.GET)
     @ResponseBody
     public List<UserDetailsDto> getUsers(){
+
         return userDetails.getUserDetails();
     }
 
