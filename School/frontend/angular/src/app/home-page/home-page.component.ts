@@ -141,7 +141,7 @@ export class HomePageComponent implements OnInit {
   }
 
   deleteRow(element:any){
-    us
+    
     // this.authService.removeUser(element);
 
   }
