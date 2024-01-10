@@ -52,7 +52,7 @@ export class AuthService {
     , httpOptions);
   }
 
-  removeUser(userDetails:UserDetails):void{
-     this.http.delete<any>(apiServerUrl + `/userDetails/remove`+{userDetails}, httpOptions);
+  removeUser(userDetails:UserDetails):Observable<any>{
+     return this.http.post(apiServerUrl + `/userDetails/remove`,userDetails,httpOptions);
   }
 }

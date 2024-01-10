@@ -74,7 +74,7 @@ public class UserController {
     }
 
 
-    @RequestMapping(value = "/api/v1/auth/userDetails/remove", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/api/v1/auth/userDetails/remove", method = RequestMethod.POST)
     @ResponseBody
     public void RemoveUserDetails(@RequestBody UserDetailsDto userDto) {
          userDetails.removeUserDetails(userDto);

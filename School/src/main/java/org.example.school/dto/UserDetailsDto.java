@@ -23,14 +23,14 @@ public class UserDetailsDto {
 
     private long dateOfschool;
 
-    private List<ClassAndYearEntity> classesSubjects;
+    private List<ClassAndYearDto> classesSubjects;
 
     private String classRightNow;
 
     public UserDetailsDto() {
     }
 
-    public UserDetailsDto(String firstname, String lastname, Role role, String email, String photo, Long age, Grade grade, long dateOfschool, List<ClassAndYearEntity> classesSubjects, String classRightNow) {
+    public UserDetailsDto(String firstname, String lastname, Role role, String email, String photo, Long age, Grade grade, long dateOfschool, List<ClassAndYearDto> classesSubjects, String classRightNow) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.role = role;
@@ -107,11 +107,11 @@ public class UserDetailsDto {
         this.dateOfschool = dateOfschool;
     }
 
-    public List<ClassAndYearEntity> getClassesSubjects() {
+    public List<ClassAndYearDto> getClassesSubjects() {
         return classesSubjects;
     }
 
-    public void setClassesSubjects(List<ClassAndYearEntity> classesSubjects) {
+    public void setClassesSubjects(List<ClassAndYearDto> classesSubjects) {
         this.classesSubjects = classesSubjects;
     }
 

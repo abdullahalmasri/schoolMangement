@@ -1,9 +1,11 @@
 package org.example.school.services;
 
+import org.example.school.dao.ClassAndYearEntity;
 import org.example.school.dao.StudentEntity;
 import org.example.school.dao.UserDetailsEntity;
 import org.example.school.dao.sql.UserDetailsRepo;
 import org.example.school.dao.sql.UserRepo;
+import org.example.school.dto.ClassAndYearDto;
 import org.example.school.dto.StudentDto;
 import org.example.school.dto.UserDetailsDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -105,6 +108,14 @@ public class UserServiceImp implements UserService,UserDetailsService {
 
     @Override
     public UserDetailsEntity addUserDetails(UserDetailsDto userDetailsDto) {
+        List<ClassAndYearEntity> classAndYearEntity =new ArrayList<>();
+        userDetailsDto.getClassesSubjects().stream()
+                .forEach(classAndYearDto -> {
+                    ClassAndYearEntity ce = new ClassAndYearEntity();
+                    ce.setYear(classAndYearDto.getYear());
+                    ce.setClasses(classAndYearDto.getClasses());
+                    classAndYearEntity.add(ce);
+                });
         UserDetailsEntity userDetails = new UserDetailsEntity();
         userDetails.setFirstname(userDetailsDto.getFirstname());
         userDetails.setLastname(userDetailsDto.getLastname());
@@ -112,7 +123,7 @@ public class UserServiceImp implements UserService,UserDetailsService {
         userDetails.setAge(userDetailsDto.getAge());
         userDetails.setRole(userDetailsDto.getRole());
         userDetails.setClassRightNow(userDetailsDto.getClassRightNow());
-        userDetails.setClassesSubjects(userDetailsDto.getClassesSubjects());
+        userDetails.setClassesSubjects(classAndYearEntity);
         userDetails.setDateOfschool(userDetailsDto.getDateOfschool());
         userDetails.setGrade(userDetailsDto.getGrade());
         userDetails.setPhoto(userDetailsDto.getPhoto());
@@ -123,23 +134,43 @@ public class UserServiceImp implements UserService,UserDetailsService {
     @Override
     public void removeUserDetails(UserDetailsDto userDetailsDto) {
         UserDetailsEntity userDetails = new UserDetailsEntity();
+
+        List<ClassAndYearEntity> classAndYearEntity =new ArrayList<>();
+        userDetailsDto.getClassesSubjects().stream()
+                .forEach(classAndYearDto -> {
+                    ClassAndYearEntity ce = new ClassAndYearEntity();
+                    ce.setYear(classAndYearDto.getYear());
+                    ce.setClasses(classAndYearDto.getClasses());
+                    classAndYearEntity.add(ce);
+                    userDetails.setId(classAndYearDto.getUserDetailsEntity());
+                });
         userDetails.setFirstname(userDetailsDto.getFirstname());
         userDetails.setLastname(userDetailsDto.getLastname());
         userDetails.setEmail(userDetailsDto.getEmail());
         userDetails.setAge(userDetailsDto.getAge());
         userDetails.setRole(userDetailsDto.getRole());
         userDetails.setClassRightNow(userDetailsDto.getClassRightNow());
-        userDetails.setClassesSubjects(userDetailsDto.getClassesSubjects());
+        userDetails.setClassesSubjects(classAndYearEntity);
         userDetails.setDateOfschool(userDetailsDto.getDateOfschool());
         userDetails.setGrade(userDetailsDto.getGrade());
         userDetails.setPhoto(userDetailsDto.getPhoto());
-        userDetailsRepo.delete(userDetails);
+
+        userDetailsRepo.deleteById(userDetails.getId());
     }
 
     @Override
     public List<UserDetailsDto> getUserDetails() {
         return userDetailsRepo.findAll().stream()
                 .map(userDetailsEntity -> {
+                    List<ClassAndYearDto> classAndYearEntity =new ArrayList<>();
+                    userDetailsEntity.getClassesSubjects().stream()
+                            .forEach(classAndYearDto -> {
+                                ClassAndYearDto ce = new ClassAndYearDto();
+                                ce.setYear(classAndYearDto.getYear());
+                                ce.setClasses(classAndYearDto.getClasses());
+                                ce.setUserDetailsEntity(userDetailsEntity.getId());
+                                classAndYearEntity.add(ce);
+                            });
                     UserDetailsDto userDetails = new UserDetailsDto();
                     userDetails.setFirstname(userDetailsEntity.getFirstname());
                     userDetails.setLastname(userDetailsEntity.getLastname());
@@ -147,7 +178,7 @@ public class UserServiceImp implements UserService,UserDetailsService {
                     userDetails.setAge(userDetailsEntity.getAge());
                     userDetails.setRole(userDetailsEntity.getRole());
                     userDetails.setClassRightNow(userDetailsEntity.getClassRightNow());
-                    userDetails.setClassesSubjects(userDetailsEntity.getClassesSubjects());
+                    userDetails.setClassesSubjects(classAndYearEntity);
                     userDetails.setDateOfschool(userDetailsEntity.getDateOfschool());
                     userDetails.setGrade(userDetailsEntity.getGrade());
                     userDetails.setPhoto(userDetailsEntity.getPhoto());
@@ -158,6 +189,14 @@ public class UserServiceImp implements UserService,UserDetailsService {
 
     @Override
     public UserDetailsEntity updateUserDetails(UserDetailsDto userDetailsDto) {
+        List<ClassAndYearEntity> classAndYearEntity =new ArrayList<>();
+        userDetailsDto.getClassesSubjects().stream()
+                .forEach(classAndYearDto -> {
+                    ClassAndYearEntity ce = new ClassAndYearEntity();
+                    ce.setYear(classAndYearDto.getYear());
+                    ce.setClasses(classAndYearDto.getClasses());
+                    classAndYearEntity.add(ce);
+                });
         UserDetailsEntity userDetails = new UserDetailsEntity();
         userDetails.setFirstname(userDetailsDto.getFirstname());
         userDetails.setLastname(userDetailsDto.getLastname());
@@ -165,7 +204,7 @@ public class UserServiceImp implements UserService,UserDetailsService {
         userDetails.setAge(userDetailsDto.getAge());
         userDetails.setRole(userDetailsDto.getRole());
         userDetails.setClassRightNow(userDetailsDto.getClassRightNow());
-        userDetails.setClassesSubjects(userDetailsDto.getClassesSubjects());
+        userDetails.setClassesSubjects(classAndYearEntity);
         userDetails.setDateOfschool(userDetailsDto.getDateOfschool());
         userDetails.setGrade(userDetailsDto.getGrade());
         userDetails.setPhoto(userDetailsDto.getPhoto());

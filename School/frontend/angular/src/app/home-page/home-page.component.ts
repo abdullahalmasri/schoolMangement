@@ -41,6 +41,7 @@ export class HomePageComponent implements OnInit {
     private modalService: NgbModal
   ) {}
 
+  userDetails : UserDetails | undefined;
   dataSource = new MatTableDataSource<any>();
   displayedColumns: string[] = [
     "age",
@@ -136,13 +137,23 @@ export class HomePageComponent implements OnInit {
     console.log(filteredData);
   }
 
-  editRow(ele:any){
-    console.log('hey',ele);
+  editRow(element:any){
+    this.dialog.openDialogs;
+    this.userDetails =element;
+    console.log('user ',this.userDetails);
+    if(this.userDetails!=null)
+    this.authService.updateUserDetails(this.userDetails).subscribe((data)=>{
+      console.log(data);
+    });
   }
 
   deleteRow(element:any){
-    
-    // this.authService.removeUser(element);
+    this.userDetails =element;
+    console.log('user ',this.userDetails);
+    if(this.userDetails!=null)
+    this.authService.removeUser(this.userDetails).subscribe((data)=>{
+      console.log(data);
+    });
 
   }
 }

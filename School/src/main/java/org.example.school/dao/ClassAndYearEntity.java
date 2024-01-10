@@ -56,7 +56,7 @@ public class ClassAndYearEntity {
 //    public UserDetailsEntity getUserDetailsEntity() {
 //        return userDetailsEntity;
 //    }
-//
+////
 //    public void setUserDetailsEntity(UserDetailsEntity userDetailsEntity) {
 //        this.userDetailsEntity = userDetailsEntity;
 //    }
